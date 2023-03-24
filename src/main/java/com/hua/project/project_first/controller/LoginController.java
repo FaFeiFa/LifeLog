@@ -37,6 +37,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ReMsg login(HttpServletRequest request,
                        HttpServletResponse response) {
+        new ReMsg();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         password = encryptService.getResult(email + password);
