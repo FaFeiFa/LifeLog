@@ -1,5 +1,6 @@
 package com.hua.project.project_first.controller;
 
+import com.hua.project.project_first.pojo.Code;
 import com.hua.project.project_first.pojo.ReMsg;
 import com.hua.project.project_first.pojo.User;
 import com.hua.project.project_first.service.registerAndLoginService.CookieService;
