@@ -31,7 +31,7 @@ public class LoginController {
     /**
      * /login接口,用于登录和颁发token(14天)
      */
-    github
+    github1111111111111111
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ReMsg login(HttpServletRequest request,
                        HttpServletResponse response) {
