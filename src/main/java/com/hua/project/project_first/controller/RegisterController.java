@@ -38,8 +38,6 @@ public class RegisterController {
     @RequestMapping(value = "/register" ,method = RequestMethod.POST)
     public ReMsg register(HttpServletRequest request ,
                            HttpSession session){
-        ReMsg reMsg = new ReMsg();
-        String email = request.getParameter("email");
         int i ;
         try {
             i = registerService.sendMail(email);
