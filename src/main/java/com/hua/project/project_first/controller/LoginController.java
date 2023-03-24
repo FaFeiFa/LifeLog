@@ -1,5 +1,6 @@
 package com.hua.project.project_first.controller;
 
+import com.hua.project.project_first.pojo.Code;
 import com.hua.project.project_first.pojo.ReMsg;
 import com.hua.project.project_first.pojo.User;
 import com.hua.project.project_first.service.registerAndLoginService.CookieService;
@@ -37,6 +38,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ReMsg login(HttpServletRequest request,
                        HttpServletResponse response) {
+        new Code();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         password = encryptService.getResult(email + password);
