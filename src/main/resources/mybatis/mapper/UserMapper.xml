@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.project.project_first.dao.UserMapper">
+    <!--void setUser(User user);-->
+    <update id="setUser" parameterType="com.hua.project.project_first.pojo.User">
+        insert into user (id,email,password,nickname) values (#{id},#{email},#{password},#{nickname})
+    </update>
+    <!--void rePassword(String email , String password);-->
+    <update id="rePassword">
+        update user set password = {#{password}} where email = {#{email}}
+    </update>
+
+    <select id="equalUser" resultType="com.hua.project.project_first.pojo.User">
+        select id,email,nickname from user where email = #{email} and password = #{password}
+    </select>
+</mapper>

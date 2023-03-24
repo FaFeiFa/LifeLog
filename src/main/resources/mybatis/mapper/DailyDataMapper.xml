@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.project.project_first.dao.DailyDataMapper">
+
+    <insert id="postData" parameterType="com.hua.project.project_first.pojo.DailyData">
+        insert into table Daily_data (id,email,day_time,step,water,heigth,weight)
+            values(0,#{email},#{dayTime},#{step},#{water},#{heigth},#{weight})
+    </insert>
+</mapper>
