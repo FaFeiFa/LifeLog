@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.*;
@@ -30,17 +31,17 @@ public class GetMsgController {
 
     /**
      * 获取用户头像信息,以base64格式字符串返回
-     * @param request
-     * @param session
      * @return
      * hashMap.put("HeadImgStr",HeadImg);
      * @throws IOException
      */
     @GetMapping("/getHeadImg")
-    public ReMsg getHeadImg(HttpServletRequest request,
-                            HttpSession session) throws IOException {
-        ReMsg reMsg = new ReMsg();
-        String ID = TokenService.SelectToken((String)session.getAttribute("UserToken"), "ID");
+    public ReMsg getHeadImg(@RequestParam("SERVER_TOKEN") String SERVER_TOKEN
+
+                            )  {
+
+        String EMAIL = TokenService.SelectToken(SERVER_TOKEN,"EMAIL");
+
         String HeadImg = headImgRedisService.GetHeadImg(ID);
         if(HeadImg == null){
             try {
@@ -69,15 +70,12 @@ public class GetMsgController {
      * hashMap.put("nickname",NICKNAME);
      */
     @GetMapping("/getUserInformation")
-    public ReMsg getEmail(HttpSession session){
-        ReMsg reMsg = new ReMsg();
+    public ReMsg getByEmail(@RequestParam("email") String email){
         String ID = null;
         String EMAIL = null;
         String NICKNAME = null;
         try {
-            ID = TokenService.SelectToken((String)session.getAttribute("UserToken"), "ID");
-            EMAIL = TokenService.SelectToken((String)session.getAttribute("UserToken"), "EMAIL");
-            NICKNAME = TokenService.SelectToken((String)session.getAttribute("UserToken"), "NICKNAME");
+
         }catch (Exception e){
             reMsg.setStatus(false);
             reMsg.setError(e);

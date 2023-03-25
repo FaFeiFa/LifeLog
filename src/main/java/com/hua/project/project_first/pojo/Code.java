@@ -9,6 +9,7 @@ package com.hua.project.project_first.pojo;
  * 429 Too Many Requests 用户在给定的时间内发送了太多请求（"限制请求速率"）
  * 500 Internal Server Error 服务器遇到了不知道如何处理的情况。
  */
+
 public enum Code {
     OK_200,
     BadRequest_400,

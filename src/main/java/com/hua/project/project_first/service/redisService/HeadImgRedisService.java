@@ -12,10 +12,11 @@ import java.util.concurrent.TimeUnit;
 public class HeadImgRedisService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
     public void PutHeadImg(String ImgStr , String ID){
         String key = ID + "_" + "HeadImg";
         stringRedisTemplate.opsForValue().set(key,ImgStr);
-        stringRedisTemplate.expire(key,1, TimeUnit.HOURS);
+        stringRedisTemplate.expire(key,1, TimeUnit.DAYS);
         log.info("key:{}",key);
     }
     public String GetHeadImg(String ID){

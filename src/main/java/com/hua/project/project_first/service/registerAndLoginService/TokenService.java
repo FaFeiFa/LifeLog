@@ -5,12 +5,18 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import com.hua.project.project_first.pojo.User;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
+@Service
+@Slf4j
 public class TokenService {
     private static String secret = "!@#$%shiguohuashishuaige!@#_#@_#--_-@_-+hahahahahha";
     /**
@@ -51,30 +57,13 @@ public class TokenService {
         DecodedJWT verify = jwtVerifier.verify(token);// 传入token
         return verify.getClaim(yourUse).asString();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public String issuedToken(User user){
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("ID",String.valueOf(user.getId()));
+        hashMap.put("EMAIL", user.getEmail());
+        hashMap.put("NICKNAME", user.getNickname());
+        String token = TokenService.InsertToken(hashMap,14, Calendar.DATE);
+        log.info("已为 userID 为 {}的用户颁发 TOKEN {}",user.getId(),token);
+        return token;
+    }
 }

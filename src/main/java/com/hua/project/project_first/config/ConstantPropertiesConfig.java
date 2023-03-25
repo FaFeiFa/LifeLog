@@ -1,11 +1,8 @@
 package com.hua.project.project_first.config;
 
-
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 @Configuration
 public class ConstantPropertiesConfig implements InitializingBean {

@@ -1,7 +1,6 @@
 package com.hua.project.project_first.controller;
 
 import com.hua.project.project_first.pojo.ReMsg;
-import com.hua.project.project_first.pojo.User;
 import com.hua.project.project_first.service.getMsgService.GetHeadStringService;
 import com.hua.project.project_first.service.putService.PutHeadImgService;
 import com.hua.project.project_first.service.putService.PutMsgService;
@@ -10,8 +9,6 @@ import com.hua.project.project_first.service.redisService.RegisterRedisService;
 import com.hua.project.project_first.service.registerAndLoginService.EncryptService;
 import com.hua.project.project_first.service.registerAndLoginService.RegisterService;
 import com.hua.project.project_first.service.registerAndLoginService.TokenService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,29 +44,18 @@ public class PutMsgController {
     PutMsgService putMsgService;
     /**
      * /putHeadImg接口,用于更新用户头像
-     * @param request
      * 需要 "headImg" 参数 MultipartFile类型
-     * @param response
      * @return
      */
     @RequestMapping(value = "/putHeadImg",method = RequestMethod.PUT)
-    public ReMsg upload(HttpServletRequest request,
-                        HttpSession session,
-                        HttpServletResponse response,
-                        @RequestPart("headImg") MultipartFile headImg){
+    public ReMsg upload(@RequestPart("headImg") MultipartFile headImg){
         ReMsg reMsg = new ReMsg();
         String userToken = (String)session.getAttribute("UserToken");
         String ID = TokenService.SelectToken(userToken, "ID");
-        /*int contentLength = request.getContentLength();
-        response.setContentLength(contentLength);*/
         String uploadUrl = null;
         try {
             uploadUrl = putHeadImgService.upload(headImg,ID);
         } catch (IOException e) {
-            e.printStackTrace();
-            reMsg.setStatus(true);
-            reMsg.setError(e);
-            return reMsg;
         }
         log.info("用户ID{}的头像上传成功,访问路径为:{}",ID,uploadUrl);
         /*
@@ -79,10 +65,6 @@ public class PutMsgController {
         try {
             HeadImg = getHeadStringService.GetImgByID(ID);
         } catch (IOException e) {
-            e.printStackTrace();
-            reMsg.setStatus(false);
-            reMsg.setError(e);
-            return reMsg;
         }
         headImgRedisService.PutHeadImg(HeadImg,ID);
         reMsg.setStatus(true);

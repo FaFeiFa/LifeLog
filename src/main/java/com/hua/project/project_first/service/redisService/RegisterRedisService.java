@@ -13,15 +13,16 @@ public class RegisterRedisService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    public void SendV(int i , String email){
+    public void SendV(int i, String email) {
         String key = email + "verify";
         String value = String.valueOf(i);
-        stringRedisTemplate.opsForValue().set(key,value);
-        stringRedisTemplate.expire(key,5, TimeUnit.MINUTES);
-        log.info("key:{}",key);
+        stringRedisTemplate.opsForValue().set(key, value);
+        stringRedisTemplate.expire(key, 5, TimeUnit.MINUTES);
+        log.info("key:{}", key);
+
     }
 
-    public String GetV(String email){
+    public String GetV(String email) {
         return stringRedisTemplate.opsForValue().get(email);
     }
 }

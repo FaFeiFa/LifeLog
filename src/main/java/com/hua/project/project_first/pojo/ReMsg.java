@@ -8,8 +8,8 @@ import java.util.Map;
 @Data
 @ToString
 @AllArgsConstructor
-public class ReMsg {
-    private Code code;
+public class  ReMsg {
+    private String code;
     private String error;
     private Map msgMap;
 }
