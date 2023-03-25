@@ -56,5 +56,6 @@ public class LoginController {
         reMsg.setStatus(false);
         reMsg.setError(new Exception("用户验证失败"));
         return reMsg;
+        
     }
 }
