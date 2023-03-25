@@ -13,14 +13,14 @@ public class HeadImgRedisService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    public void PutHeadImg(String ImgStr , String ID){
-        String key = ID + "_" + "HeadImg";
+    public void PutHeadImg(String ImgStr , String EMAIL){
+        String key = EMAIL + "_" + "HeadImg";
         stringRedisTemplate.opsForValue().set(key,ImgStr);
         stringRedisTemplate.expire(key,1, TimeUnit.DAYS);
         log.info("key:{}",key);
     }
-    public String GetHeadImg(String ID){
-        String key = ID + "_" + "HeadImg";
+    public String GetHeadImgByEmail(String EMAIL){
+        String key = EMAIL + "_" + "HeadImg";
         return stringRedisTemplate.opsForValue().get(key);
     }
 }

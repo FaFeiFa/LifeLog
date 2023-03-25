@@ -39,10 +39,10 @@ public class GetHeadStringService {
 
     String endpoint = ConstantPropertiesConfig.END_POINT;
     String bucketName = ConstantPropertiesConfig.BUCKET_NAME;
-    public String GetImgByID(String ID) throws IOException {
+    public String GetImgByEmail(String EMAIL) throws IOException {
 
         String headImgUrl = "headImg";
-        String key = headImgUrl + "/" + ID + ".jpg";
+        String key = headImgUrl + "/" + EMAIL + ".jpg";
         String url = "https://"+bucketName+"."+"cos"+"."+endpoint+".myqcloud.com"+"/"+key;
         URL img = new URL(url);
         HttpURLConnection httpConn = (HttpURLConnection) img.openConnection();

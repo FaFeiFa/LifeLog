@@ -1,10 +1,12 @@
 package com.hua.project.project_first.controller;
 
+import com.hua.project.project_first.dao.UserMapper;
 import com.hua.project.project_first.pojo.Code;
 import com.hua.project.project_first.pojo.ReMsg;
 import com.hua.project.project_first.pojo.User;
 import com.hua.project.project_first.service.registerAndLoginService.EncryptService;
 import com.hua.project.project_first.service.redisService.RegisterRedisService;
+import com.hua.project.project_first.service.registerAndLoginService.RegisterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class RegisterController {
 
     @Autowired
-    com.hua.project.project_first.service.registerAndLoginService.RegisterService registerService;
+    RegisterService registerService;
     @Autowired
     RegisterRedisService registerRedisService;
     @Autowired
     EncryptService encryptService;
+    @Autowired
+    UserMapper userMapper;
 
     /**
      *  /verify 用于接受邮箱
@@ -34,6 +38,8 @@ public class RegisterController {
                           ){
         int i;
         try {
+            if(userMapper.selectUserByEmail(email) != null)
+                return new ReMsg(Code.NotFound_404.toString(),"用户已经存在",null);
             i = registerService.sendMail(email);
             log.info("向email为 {} 的用户发送了 验证码: {}",email,i);
         } catch (Exception e) {

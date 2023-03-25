@@ -31,4 +31,4 @@ mybatis:
           filter:
             enabled : true
 server:
-  port: 80
+  port: 1234

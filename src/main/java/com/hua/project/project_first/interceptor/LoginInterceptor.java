@@ -12,7 +12,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
         String server_token = request.getParameter("SERVER_TOKEN");
-        if(server_token.isEmpty()){
+        if(server_token == null || server_token.isEmpty()){
             log.info("拦截的请求是:{}",requestURI);
             response.sendRedirect("/login");
             return false;

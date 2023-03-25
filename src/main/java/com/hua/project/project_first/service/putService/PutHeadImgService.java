@@ -37,7 +37,7 @@ public class PutHeadImgService {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    public String upload(MultipartFile file, String ID) throws IOException {
+    public String upload(MultipartFile file, String EMAIL) throws IOException {
         String endpoint = ConstantPropertiesConfig.END_POINT;
         String bucketName = ConstantPropertiesConfig.BUCKET_NAME;
         // 1 初始化用户身份信息（secretId, secretKey）。
@@ -73,7 +73,7 @@ public class PutHeadImgService {
         //file.getOriginalFilename();
         //String dateUrl = new DateTime().toString("yyyy/MM/dd");
 
-        String key = ID;
+        String key = EMAIL;
         String headImgUrl = "headImg";
         key = headImgUrl + "/" + key + ".jpg";
         ObjectMetadata objectMetadata = new ObjectMetadata();

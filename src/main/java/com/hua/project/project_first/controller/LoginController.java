@@ -49,6 +49,5 @@ public class LoginController {
             return new ReMsg(Code.OK_200.toString(),null, MapUtil.GetMap("SERVER_TOKEN",token));
         }
         return new ReMsg(Code.NotFound_404.toString(),"用户不存在",null);
-        
     }
 }

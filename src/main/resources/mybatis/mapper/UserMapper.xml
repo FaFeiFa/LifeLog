@@ -15,4 +15,7 @@
     <select id="equalUser" resultType="com.hua.project.project_first.pojo.User">
         select id,email,nickname from user where email = #{email} and password = #{password}
     </select>
+    <select id="selectUserByEmail" resultType="com.hua.project.project_first.pojo.User">
+        select id,email,nickname from user where email = #{email}
+    </select>
 </mapper>

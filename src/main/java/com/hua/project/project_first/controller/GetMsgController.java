@@ -1,6 +1,9 @@
 package com.hua.project.project_first.controller;
 
+import com.hua.project.project_first.dao.UserMapper;
+import com.hua.project.project_first.pojo.Code;
 import com.hua.project.project_first.pojo.ReMsg;
+import com.hua.project.project_first.pojo.User;
 import com.hua.project.project_first.service.getMsgService.GetHeadStringService;
 import com.hua.project.project_first.service.redisService.HeadImgRedisService;
 import com.hua.project.project_first.service.registerAndLoginService.TokenService;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -28,67 +32,52 @@ public class GetMsgController {
     HeadImgRedisService headImgRedisService;
     @Autowired
     GetHeadStringService getHeadStringService;
+    @Autowired
+    UserMapper userMapper;
 
     /**
      * 获取用户头像信息,以base64格式字符串返回
-     * @return
-     * hashMap.put("HeadImgStr",HeadImg);
+     *
+     * @return hashMap.put(" HeadImgStr ", HeadImg);
      * @throws IOException
      */
     @GetMapping("/getHeadImg")
-    public ReMsg getHeadImg(@RequestParam("SERVER_TOKEN") String SERVER_TOKEN
-
-                            )  {
-
-        String EMAIL = TokenService.SelectToken(SERVER_TOKEN,"EMAIL");
-
-        String HeadImg = headImgRedisService.GetHeadImg(ID);
-        if(HeadImg == null){
-            try {
-                HeadImg = getHeadStringService.GetImgByID(ID);
-            } catch (IOException e) {
-                e.printStackTrace();
-                reMsg.setStatus(false);
-                reMsg.setError(e);
-                return reMsg;
-            }
-            headImgRedisService.PutHeadImg(HeadImg,ID);
+    public ReMsg getHeadImg(@RequestParam("SERVER_TOKEN") String SERVER_TOKEN) {
+        try {
+            String EMAIL = TokenService.SelectToken(SERVER_TOKEN, "EMAIL");
+            String HeadImg = headImgRedisService.GetHeadImgByEmail(EMAIL);
+            if (HeadImg == null)
+                HeadImg = getHeadStringService.GetImgByEmail(EMAIL);
+            headImgRedisService.PutHeadImg(HeadImg, EMAIL);
+        }catch (Exception e){
+            return new ReMsg(Code.ServerError_500.toString(),e.getMessage(),null);
         }
-        reMsg.setStatus(true);
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("HeadImgStr",HeadImg);
-        reMsg.setMsgMap(hashMap);
-        return reMsg;
-    }
+        return new ReMsg(Code.OK_200.toString(),null,null);
+}
 
     /**
      * 获取用户信息
-     * @param session
-     * @return
-     * hashMap.put("id" , ID);
+     * @return hashMap.put(" id ", ID);
      * hashMap.put("email",EMAIL);
      * hashMap.put("nickname",NICKNAME);
      */
     @GetMapping("/getUserInformation")
-    public ReMsg getByEmail(@RequestParam("email") String email){
-        String ID = null;
-        String EMAIL = null;
-        String NICKNAME = null;
-        try {
-
+    public ReMsg getByEmail(@RequestParam("email") String email) {
+        try{
+            User user = userMapper.selectUserByEmail(email);
+            Map hashMap = new HashMap<>();
+            hashMap.put("ID_SERVER",user.getId());
+            hashMap.put("EMAIL_SERVER",user.getEmail());
+            hashMap.put("NICKNAME_SERVER",user.getNickname());
+            return new ReMsg(Code.OK_200.toString(),null,hashMap);
         }catch (Exception e){
-            reMsg.setStatus(false);
-            reMsg.setError(e);
+            return new ReMsg(Code.ServerError_500.toString(),e.getMessage(),null);
         }
-        reMsg.setStatus(true);
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("id",ID);
-        hashMap.put("email",EMAIL);
-        hashMap.put("nickname",NICKNAME);
-        reMsg.setMsgMap(hashMap);
-        return reMsg;
-    }
 
+
+
+
+    }
 
 
 }
