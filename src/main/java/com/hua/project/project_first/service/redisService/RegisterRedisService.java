@@ -22,7 +22,5 @@ public class RegisterRedisService {
 
     }
 
-    public String GetV(String email) {
-        return stringRedisTemplate.opsForValue().get(email);
-    }
+
 }

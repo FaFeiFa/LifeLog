@@ -10,4 +10,5 @@ public interface UserMapper {
     User equalUser(String email , String password);
     void rePassword(String email , String password);
     User selectUserByEmail(String email);
+    User selectUserByNickName(String nickname);
 }

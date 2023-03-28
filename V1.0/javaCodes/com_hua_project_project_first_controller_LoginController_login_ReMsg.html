@@ -10,23 +10,23 @@
 <pre class="prettyprint lang-java">
 public class ReMsg implements Serializable{
 
-    private boolean status; //
-    private Object error; //
+    private String code; //
+    private String error; //
     private Object msgMap; //
 
-    public boolean getStatus(){
-        return status;
+    public String getCode(){
+        return code;
     }
 
-    public void setStatus(boolean status){
-        this.status = status;
+    public void setCode(String code){
+        this.code = code;
     }
 
-    public Object getError(){
+    public String getError(){
         return error;
     }
 
-    public void setError(Object error){
+    public void setError(String error){
         this.error = error;
     }
 
@@ -40,7 +40,6 @@ public class ReMsg implements Serializable{
 
 }
 </pre>
-
 
 
 

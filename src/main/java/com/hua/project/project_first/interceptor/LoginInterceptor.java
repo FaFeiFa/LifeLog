@@ -13,10 +13,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         String server_token = request.getParameter("SERVER_TOKEN");
         if(server_token == null || server_token.isEmpty()){
-            log.info("拦截的请求是:{}",requestURI);
+
             response.sendRedirect("/login");
             return false;
         }
+        log.info("拦截的请求是:{}",requestURI);
         return true;
     }
 

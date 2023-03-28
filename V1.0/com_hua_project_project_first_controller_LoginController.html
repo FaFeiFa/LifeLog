@@ -55,9 +55,8 @@
                     <a class="catalog-item" href="com_hua_project_project_first_controller_GetMsgController.html#getHeadImg">
                         获取用户头像信息,以base64格式字符串返回
                     </a>
-                    <a class="catalog-item" href="com_hua_project_project_first_controller_GetMsgController.html#getEmail">
+                    <a class="catalog-item" href="com_hua_project_project_first_controller_GetMsgController.html#getByEmail">
                         获取用户信息
-方法类型:GET
                     </a>
             </div>
         </div>
@@ -69,38 +68,23 @@
             <div id="collapse1" class="collapse in " aria-labelledby="heading1">
                     <a class="catalog-item" href="com_hua_project_project_first_controller_LoginController.html#login">
                         /login接口,用于登录和颁发token(14天)
-方法类型:POST
                     </a>
             </div>
         </div>
         <div class="panel">
             <div id="heading2" data-parent="#accordion" class="catalog-title" data-toggle="collapse"
                  aria-expanded="true" data-target="#collapse2" aria-controls="collapse2">
-                <i class="glyphicon glyphicon-align-justify"></i> PutMsgController
-            </div>
-            <div id="collapse2" class="collapse " aria-labelledby="heading2">
-                    <a class="catalog-item" href="com_hua_project_project_first_controller_PutMsgController.html#upload">
-                        /putHeadImg接口,用于更新用户头像
-方法类型:PUT
-                    </a>
-            </div>
-        </div>
-        <div class="panel">
-            <div id="heading3" data-parent="#accordion" class="catalog-title" data-toggle="collapse"
-                 aria-expanded="true" data-target="#collapse3" aria-controls="collapse3">
                 <i class="glyphicon glyphicon-align-justify"></i> RegisterController
             </div>
-            <div id="collapse3" class="collapse " aria-labelledby="heading3">
+            <div id="collapse2" class="collapse " aria-labelledby="heading2">
                     <a class="catalog-item" href="com_hua_project_project_first_controller_RegisterController.html#register">
                          /verify 用于接受邮箱
- 方法类型:POST
+需要参数 "email"
+email 不能超过20位
                     </a>
                     <a class="catalog-item" href="com_hua_project_project_first_controller_RegisterController.html#verify">
                         /verify 用于接受验证码(5分钟内有效)
-方法类型:POST
-                    </a>
-                    <a class="catalog-item" href="com_hua_project_project_first_controller_RegisterController.html#lastTemp">
-                        /lastTemp 用于接受昵称和密码(1小时内有效)
+需要参数"verify"
                     </a>
             </div>
         </div>
@@ -117,8 +101,7 @@
                 <div class="page-inner">
                     <div class="action-list">
                         <div class="action-item">
-<h2 id="login"><a href="#">/login接口,用于登录和颁发token(14天)
-方法类型:POST </a></h2>
+<h2 id="login"><a href="#">/login接口,用于登录和颁发token(14天) </a></h2>
 <p><strong>请求URL</strong></p>
 <p>
     <code>/login</code>
@@ -126,8 +109,8 @@
 </p>
     <p><strong>返回结果</strong></p>
     <pre class="prettyprint lang-json">{
-	"status":"boolean",
-	"error":{},
+	"code":"string",
+	"error":"string",
 	"msgMap":{}
 }</pre>
         <div class="form-group">
@@ -153,17 +136,13 @@
 
     var search_source_data = [
             {name: 'GetMsgController.获取用户头像信息,以base64格式字符串返回', url: 'com_hua_project_project_first_controller_GetMsgController.html#getHeadImg'},
-            {name: 'GetMsgController.获取用户信息
-方法类型:GET', url: 'com_hua_project_project_first_controller_GetMsgController.html#getEmail'},
-            {name: 'LoginController./login接口,用于登录和颁发token(14天)
-方法类型:POST', url: 'com_hua_project_project_first_controller_LoginController.html#login'},
-            {name: 'PutMsgController./putHeadImg接口,用于更新用户头像
-方法类型:PUT', url: 'com_hua_project_project_first_controller_PutMsgController.html#upload'},
+            {name: 'GetMsgController.获取用户信息', url: 'com_hua_project_project_first_controller_GetMsgController.html#getByEmail'},
+            {name: 'LoginController./login接口,用于登录和颁发token(14天)', url: 'com_hua_project_project_first_controller_LoginController.html#login'},
             {name: 'RegisterController. /verify 用于接受邮箱
- 方法类型:POST', url: 'com_hua_project_project_first_controller_RegisterController.html#register'},
+需要参数 "email"
+email 不能超过20位', url: 'com_hua_project_project_first_controller_RegisterController.html#register'},
             {name: 'RegisterController./verify 用于接受验证码(5分钟内有效)
-方法类型:POST', url: 'com_hua_project_project_first_controller_RegisterController.html#verify'},
-            {name: 'RegisterController./lastTemp 用于接受昵称和密码(1小时内有效)', url: 'com_hua_project_project_first_controller_RegisterController.html#lastTemp'},
+需要参数"verify"', url: 'com_hua_project_project_first_controller_RegisterController.html#verify'},
     ];
 
 

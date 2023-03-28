@@ -13,12 +13,6 @@ spring:
       host: 124.221.94.102
       prot: 6379
       password: sgh123
-      jedis:
-        pool:
-          max-active: 8
-          max-wait: -1ms
-          max-idle: 8
-          min-idle: 0
       database: 0
 mybatis:
   #  config-location: classpath:mybatis/mybatis-config.xml

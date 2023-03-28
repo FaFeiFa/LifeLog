@@ -7,8 +7,6 @@ import com.hua.project.project_first.pojo.User;
 import com.hua.project.project_first.service.getMsgService.GetHeadStringService;
 import com.hua.project.project_first.service.redisService.HeadImgRedisService;
 import com.hua.project.project_first.service.registerAndLoginService.TokenService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,10 +71,17 @@ public class GetMsgController {
         }catch (Exception e){
             return new ReMsg(Code.ServerError_500.toString(),e.getMessage(),null);
         }
+    }
 
-
-
-
+    @GetMapping("/userExistByNickname")
+    public ReMsg userExist(String nickname){
+        try{
+            User user = userMapper.selectUserByNickName(nickname);
+            if(user == null) return new ReMsg(Code.OK_200.toString(),null,null);
+            return new ReMsg(Code.NotFound_404.toString(),"该昵称已被占用",null);
+        }catch (Exception e){
+            return new ReMsg(Code.ServerError_500.toString(),e.getMessage(),null);
+        }
     }
 
 

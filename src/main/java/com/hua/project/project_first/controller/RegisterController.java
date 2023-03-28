@@ -4,6 +4,7 @@ import com.hua.project.project_first.dao.UserMapper;
 import com.hua.project.project_first.pojo.Code;
 import com.hua.project.project_first.pojo.ReMsg;
 import com.hua.project.project_first.pojo.User;
+import com.hua.project.project_first.service.redisService.UserRedisService;
 import com.hua.project.project_first.service.registerAndLoginService.EncryptService;
 import com.hua.project.project_first.service.redisService.RegisterRedisService;
 import com.hua.project.project_first.service.registerAndLoginService.RegisterService;
@@ -26,6 +27,8 @@ public class RegisterController {
     EncryptService encryptService;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    UserRedisService userRedisService;
 
     /**
      *  /verify 用于接受邮箱
@@ -34,8 +37,7 @@ public class RegisterController {
      * @return
      */
     @RequestMapping(value = "/register" ,method = RequestMethod.POST)
-    public ReMsg register(@RequestParam("email") String email
-                          ){
+    public ReMsg register(@RequestParam("email") String email){
         int i;
         try {
             if(userMapper.selectUserByEmail(email) != null)
@@ -64,7 +66,7 @@ public class RegisterController {
                         @RequestParam("nickname") String nickname,
                         @RequestParam("password") String password) {
         try {
-            String redisVerify = registerRedisService.GetV(email + "verify");
+            String redisVerify = userRedisService.GetV(email + "verify");
             if(!redisVerify.equals(verify)){
                 log.info("用户 {} 验证码 错误",email);
                 return new ReMsg(Code.NotFound_404.toString(),"验证码错误",null);
