@@ -55,9 +55,6 @@ public class GetMsgController {
 
     /**
      * 获取用户信息
-     * @return hashMap.put(" id ", ID);
-     * hashMap.put("email",EMAIL);
-     * hashMap.put("nickname",NICKNAME);
      */
     @GetMapping("/getUserInformation")
     public ReMsg getByEmail(@RequestParam("email") String email) {
@@ -72,7 +69,9 @@ public class GetMsgController {
             return new ReMsg(Code.ServerError_500.toString(),e.getMessage(),null);
         }
     }
-
+    /**
+     * 查看昵称是否被占用
+     */
     @GetMapping("/userExistByNickname")
     public ReMsg userExist(String nickname){
         try{

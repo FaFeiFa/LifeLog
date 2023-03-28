@@ -82,6 +82,11 @@ public class PutUserMsgController {
         return new ReMsg(Code.OK_200.toString(), null, null);
     }
 
+    /**
+     * 修改密码接口,接收邮箱发送验证码
+     * @param email
+     * @return
+     */
     @PutMapping("/rePassSendVerify")
     public ReMsg rePassSendVerify(@RequestParam("email") String email) {
         if(userMapper.selectUserByEmail(email) == null)
@@ -96,6 +101,13 @@ public class PutUserMsgController {
 
     }
 
+    /**
+     * 修改密码
+     * @param verify
+     * @param email
+     * @param password
+     * @return
+     */
     @PutMapping("/rePassVerify")
     public ReMsg rePassVerify(@RequestParam("verify") String verify,
                               @RequestParam("email") String email,
